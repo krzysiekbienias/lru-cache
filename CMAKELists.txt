@@ -15,6 +15,7 @@ option(ENABLE_DEV_MAIN "Build dev_main executable (experiments)" ON)
 
 add_library(core_lib STATIC
         src/core_lib.cpp
+        src/lru_cache_deque.cpp
         # add more .cpp here as project grows
 )
 
