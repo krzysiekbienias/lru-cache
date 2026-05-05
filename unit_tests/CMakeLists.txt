@@ -1,26 +1,19 @@
-file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS
-        "${CMAKE_CURRENT_SOURCE_DIR}/test_*.cpp"
+find_package(GTest REQUIRED)
+include(GoogleTest)
+
+add_executable(lru_cache_tests
+        test_lru_cache_linked_list.cpp
+        test_lru_cache_deque.cpp
 )
 
-if(TEST_SOURCES STREQUAL "")
-    message(STATUS "No unit tests found (add unit_tests/test_*.cpp).")
-    return()
-endif()
-
-find_package(GTest REQUIRED)
-
-add_executable(test_environment ${TEST_SOURCES})
-set_target_properties(test_environment PROPERTIES
+set_target_properties(lru_cache_tests PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
 )
 
-
-target_link_libraries(test_environment
-        PRIVATE
+target_link_libraries(lru_cache_tests PRIVATE
         core_lib
         GTest::gtest
         GTest::gtest_main
 )
 
-include(GoogleTest)
-gtest_discover_tests(test_environment)
+gtest_discover_tests(lru_cache_tests)

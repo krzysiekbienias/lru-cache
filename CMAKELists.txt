@@ -13,6 +13,11 @@ option(ENABLE_TESTS "Build unit tests" ON)
 option(ENABLE_APP "Build app (production CLI)" ON)
 option(ENABLE_DEV_MAIN "Build dev_main executable (experiments)" ON)
 
+if(ENABLE_TESTS)
+    include(CTest)
+    enable_testing()
+endif()
+
 add_library(core_lib STATIC
         src/core_lib.cpp
         src/lru_cache_deque.cpp
@@ -45,6 +50,5 @@ endif()
 
 # --- Unit tests ---
 if(ENABLE_TESTS AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unit_tests/CMakeLists.txt")
-    enable_testing()
     add_subdirectory(unit_tests)
 endif()
