@@ -44,6 +44,7 @@
 cmake-build-*/
 build/
 out/
+cmake-build-debug/
 
 # CMake generated
 CMakeFiles/
@@ -64,3 +65,8 @@ CHECKLIST_NOTES.md
 
 #smoke ut
 unit_tests/test_smoke.cpp
+
+# Visual Studio Code / Cursor 
+.cache
+.vscode
+compile_commands.json
