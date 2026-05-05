@@ -1,14 +1,15 @@
 #include "lru_cache_deque.hpp"
 
+#include <algorithm>
 #include <deque>
 #include <unordered_map>
 
 
-LRUCache::LRUCache(int capacity) : m_capacity(capacity) {
-};
+LRUCacheDeque::LRUCacheDeque(int capacity) : m_capacity(capacity) {
+}
 
 
-int LRUCache::get(int key) {
+int LRUCacheDeque::get(int key) {
     auto it = m_kv.find(key);
     if (it == m_kv.end()) return -1;
 
@@ -21,7 +22,7 @@ int LRUCache::get(int key) {
 }
 
 
-void LRUCache::put(int key, int value) {
+void LRUCacheDeque::put(int key, int value) {
     // 1) key exists
     auto it = m_kv.find(key); //um has find in interface and you have O(1) time complexity
     if (it != m_kv.end()) {
@@ -34,7 +35,7 @@ void LRUCache::put(int key, int value) {
         return;
     }
     //2 ) key is new but we have already reached capacity
-    if (m_kv.size() >= m_capacity) {
+    if (static_cast<int>(m_kv.size()) >= m_capacity) {
         int lruKey = m_lru.back();
         m_lru.pop_back(); //remove from deque from the end and make space
         m_kv.erase(lruKey); // remove the key that was last in deque.

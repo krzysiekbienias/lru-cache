@@ -2,15 +2,15 @@
 #include "lru_cache_deque.hpp"
 
 
-TEST(LRUCacheTests, GetMissingReturnsMinusOne) {
-    LRUCache cache(2);
+TEST(LRUCacheDequeTests, GetMissingReturnsMinusOne) {
+    LRUCacheDeque cache(2);
 
     EXPECT_EQ(cache.get(42), -1);
     EXPECT_EQ(cache.get(-7), -1);
 }
 
-TEST(LRUCacheTests, PutThenGetReturnsValue) {
-    LRUCache cache(2);
+TEST(LRUCacheDequeTests, PutThenGetReturnsValue) {
+    LRUCacheDeque cache(2);
 
     cache.put(1, 100);
     cache.put(2, 200);
@@ -19,9 +19,9 @@ TEST(LRUCacheTests, PutThenGetReturnsValue) {
     EXPECT_EQ(cache.get(2), 200);
 }
 
-TEST(LRUCacheTests, EvictsLeastRecentlyUsedOnCapacityOverflow) {
+TEST(LRUCacheDequeTests, EvictsLeastRecentlyUsedOnCapacityOverflow) {
     // capacity = 2
-    LRUCache cache(2);
+    LRUCacheDeque cache(2);
 
     cache.put(1, 10);
     cache.put(2, 20);
@@ -34,9 +34,9 @@ TEST(LRUCacheTests, EvictsLeastRecentlyUsedOnCapacityOverflow) {
     EXPECT_EQ(cache.get(3), 30);
 }
 
-TEST(LRUCacheTests, GetMakesKeyMostRecentAffectingNextEviction) {
+TEST(LRUCacheDequeTests, GetMakesKeyMostRecentAffectingNextEviction) {
     // capacity = 2
-    LRUCache cache(2);
+    LRUCacheDeque cache(2);
 
     cache.put(1, 10);
     cache.put(2, 20);
@@ -51,9 +51,9 @@ TEST(LRUCacheTests, GetMakesKeyMostRecentAffectingNextEviction) {
     EXPECT_EQ(cache.get(3), 30);
 }
 
-TEST(LRUCacheTests, PutOnExistingKeyUpdatesValueAndRefreshesRecency) {
+TEST(LRUCacheDequeTests, PutOnExistingKeyUpdatesValueAndRefreshesRecency) {
     // capacity = 2
-    LRUCache cache(2);
+    LRUCacheDeque cache(2);
 
     cache.put(1, 10);
     cache.put(2, 20);
@@ -68,8 +68,8 @@ TEST(LRUCacheTests, PutOnExistingKeyUpdatesValueAndRefreshesRecency) {
     EXPECT_EQ(cache.get(3), 30);
 }
 
-TEST(LRUCacheTests, CapacityOneAlwaysKeepsOnlyMostRecentKey) {
-    LRUCache cache(1);
+TEST(LRUCacheDequeTests, CapacityOneAlwaysKeepsOnlyMostRecentKey) {
+    LRUCacheDeque cache(1);
 
     cache.put(1, 10);
     EXPECT_EQ(cache.get(1), 10);
