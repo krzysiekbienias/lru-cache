@@ -1,10 +1,10 @@
 #pragma once
-#include<unordered_map>
+#include <unordered_map>
 #include <list>
 
-class LRUCache {
+class LRUCacheLinkedList {
 public:
-    LRUCache(int capacity);
+    LRUCacheLinkedList(int capacity);
     int get(int key);
     void put(int key, int value);
 
@@ -15,5 +15,4 @@ private:
 
     std::list<CacheEntry> lruList;
     std::unordered_map<int, ListIt> cacheMap;
-
 };
